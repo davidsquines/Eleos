@@ -6,3 +6,5 @@ The aim of this project is to create a virtual voice assistant for my personal d
 
 This project is intended to show progress in learning python and python scripting
 
+Technologies: 
+    Speech Recognition: Google Speech Recognition , Vosk
