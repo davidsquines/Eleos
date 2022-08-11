@@ -10,8 +10,9 @@ Technologies:
     Speech Recognition: Google Speech Recognition
 
 Capabilities:
+```
     - Weather report based on my current location
     - Open applications such as Valorant, Spotify, and VS-Code on my computer
     - Play youtube videos based on user spoken input
     - Preform Google seraches based on user spoken query 
-    - 
+```
