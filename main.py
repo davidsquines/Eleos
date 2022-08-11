@@ -5,13 +5,9 @@ import datetime
 
 import pyttsx3
 import datetime
-import wikipedia
-import webbrowser
-import os
 import time
-import subprocess
-import json
-import requests
+from functions.os_operations import open_spotify, open_vs_code, open_valorant
+from functions.online_operations import play_on_youtube, google_query, get_weather_report
 
 print('Loading your AI personal Assistant - Eleos')
 
@@ -59,31 +55,47 @@ if __name__=='__main__':
         if statement == 0:
             continue
 
-        if "good bye" in statement or "ok bye" in statement or "stop" in statement:
+        if "good bye" in statement or "ok bye" in statement or "stop" in statement or "nothing" in statement: 
             speak('Eleos is shutting down, Good Bye')
             print('Eleos is shutting down, Good Bye')
             break
 
-        elif 'open youtube' in statement:
-            webbrowser.open_new_tab("https://www.youtube.com")
-            speak("youtube is open now")
-            time.sleep(5)
-
-        elif 'open google' in statement:
-            webbrowser.open_new_tab("https://www.google.com")
-            speak("Google chrome is open now")
-            time.sleep(5)
+        elif 'google search' in statement:
+            speak('What would you like to search?')
+            query = takeCommand().lower()
+            google_query(query)
 
         elif 'time' in statement:
             strTime=datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"the time is {strTime}")
 
-        elif 'search'  in statement:
-            statement = statement.replace("search", "")
-            webbrowser.open_new_tab(statement)
+        elif 'open spotify' in statement:
+            open_spotify()
+            time.sleep(5)
+        
+        elif 'open code editor' in statement:
+            open_vs_code()
             time.sleep(5)
 
-        elif 'open spotify' in statement:
-            subprocess.Popen('C:\\users\\user1\\appdata\\roaming\\spotify\\spotify.exe')
+        elif 'play youtube video' in statement:
+            speak("What video would you like to play")
+            video = takeCommand().lower()
+            play_on_youtube(video)
+            time.sleep(5)
+
+        elif 'play valorant' in statement:
+            open_valorant()
+            time.sleep(5)
+
+        elif 'what is the weather' in statement:
+            temp, feels_like = get_weather_report()
+            speak(f"The current temperature is {temp}, but it feels like {feels_like}")
+            speak("For your convenience, I am printing it on the screen")
+            print(f"The current temperature is {temp}, but it feels like {feels_like}")
+            time.sleep(5)
+
+            
+
+
 
 time.sleep(3)
