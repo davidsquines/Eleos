@@ -1,5 +1,6 @@
 # import libraries
 
+from unicodedata import category
 import speech_recognition as sr
 import datetime
 
@@ -7,13 +8,13 @@ import pyttsx3
 import datetime
 import time
 from functions.os_operations import open_spotify, open_vs_code, open_valorant
-from functions.online_operations import play_on_youtube, google_query, get_weather_report
+from functions.online_operations import play_on_youtube, google_query, get_weather_report, get_news_report
 
 print('Loading your AI personal Assistant - Eleos')
 
 engine=pyttsx3.init('sapi5')
 voices=engine.getProperty('voices')
-engine.setProperty('voice','voices[1].id')
+engine.setProperty('voice','voices[0].id')
 
 def speak(text):
     engine.say(text)
@@ -55,7 +56,7 @@ if __name__=='__main__':
         if statement == 0:
             continue
 
-        if "good bye" in statement or "ok bye" in statement or "stop" in statement or "nothing" in statement: 
+        if "good bye" in statement or "ok bye" in statement or "please stop" in statement or "nothing" in statement: 
             speak('Eleos is shutting down, Good Bye')
             print('Eleos is shutting down, Good Bye')
             break
@@ -93,6 +94,25 @@ if __name__=='__main__':
             speak("For your convenience, I am printing it on the screen")
             print(f"The current temperature is {temp}, but it feels like {feels_like}")
             time.sleep(5)
+
+        elif 'current news' in statement:
+            speak("What category of news? Possible categories include business, entertainment, general, health, science, sports and technology? ")
+            category = takeCommand().lower()
+            print(f"user said: {category}")
+            news = get_news_report(category)
+            speak('Reading the news now. I will be printing the news description and news url for your convenience')
+            for i in range(len(news)):
+                title = news[i]['title']
+                description = news[i]['description']
+                url = news[i]['url']
+                speak(title)
+                print(description)
+                print(url)
+                print('\n')
+
+
+            time.sleep(4)
+
 
             
 

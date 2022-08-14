@@ -8,6 +8,7 @@ load_dotenv()
 WEATHER_API = os.getenv('OPEN_WEATHER_API_KEY')
 LAT = os.getenv('LAT')
 LONG = os.getenv('LONG')
+NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 def play_on_youtube(video):
     kit.playonyt(video)
@@ -20,3 +21,18 @@ def get_weather_report():
     temp = res["current"]["temp"]
     feels_like = res["current"]["feels_like"]
     return temp, feels_like
+
+def get_news_report(category):
+    news = []
+    res = requests.get(f"https://newsapi.org/v2/top-headlines?country=us&category={category}&apiKey={NEWS_API_KEY}").json()
+    articles = res['articles']
+    for article in articles:
+        newsArticle = {
+            'title' : article["title"],
+            'description' : article['description'],
+            'url' : article['url']
+        }
+        news.append(newsArticle)
+    return news[:5]
+
+    
