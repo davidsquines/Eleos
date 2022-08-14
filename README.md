@@ -15,4 +15,5 @@ Capabilities:
     - Open applications such as Valorant, Spotify, and VS-Code on my computer
     - Play youtube videos based on user spoken input
     - Preform Google seraches based on user spoken query 
+    - Read News headlines from given categories, pulled from the NewsAPI. When prompted for news, Eleos will ask the what categories the user would like news from, then speak the headlines back to the user
 ```
